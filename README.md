@@ -1,6 +1,6 @@
 # RoboGame Visualization 
 ## SI 649
----
+
 ### How to run the code
 - `cd server` -> `python3 api.py -d example1 -s -t1s meowww examplematch1`
 - `cd client` ->  `python3 run.py`
