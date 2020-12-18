@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Robogame Dashboard</title>
+    <meta charset="utf-8">
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@3.0.0-rc12"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
+    <script src="https://vega.github.io/datalib/datalib.min.js"></script>
+    <script src="Robogame.js"></script>
+   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/vega-tooltip@0.16.0/vega-tooltip.scss">
+    <script src="https://cdn.jsdelivr.net/npm/vega-tooltip@0.16.0/build/vega-tooltip.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  </head>
+  <body>
+
+    <div class="container u-full-width u-max-full-width">
+
+      <div class="row">
+         <div class="four columns">
+          <p></p>
+         </div>
+        <div class="six columns">
+        <h2 class="text-muted">Robogame Dashboard</h2>
+       </div>
+      </div>
+
+      <div class="row content">
+        <div class="six columns">
+           <div class="row">
+            <div id="timeChart"></div>
+           </div>
+           <div class="row">
+          <form action="/predhint" method="POST">
+            <label>Interested Robot Ids:</label>
+            <input type="text" class="form-control" id="predid" name="predid" placeholder="enter interested robot id">
+            <button type="submit">Get hints!</button>
+          </form>
+        </div>
+          <div class="row">
+          <h5>Friendship Game:</h5>
+          <div class="row">
+          <div class="six columns">
+          <form action="/rid" method="POST">
+            <label>Interested Robot Ids:</label>
+            <input type="text" class="form-control" id="rid" name="rid" placeholder="enter interested robot id">
+          </form>
+          </div>
+          <div class="six columns">
+          <form action="/score" method="POST">
+            <label>Predicted Score:</label>
+            <input type="text" class="form-control" id="score" name="score" placeholder="enter predicted score">
+          </form>
+          </div>
+          </div>
+         </div>
+         <div class="row" id="predChart"></div>
+          <div class="row">
+          <!-- network block -->
+          <h5>Network & Family:</h5>
+          <div id="network"></div>
+          <!-- network block -->
+          </div>
+        </div>
+        <div class="six columns">
+           <div class="row">
+           <h5>Porductivity & Attributes:</h5>
+          <div class="row">
+          <button onclick="refresh_parts()">Refresh</button>
+           </div>
+          <div class="row">
+          <div id="partChart" ></div></div>
+           </div>
+          
+        </div>
+      </div>
+      <div class="row content">
+        <div class="six columns">
+          <p></p>
+        </div>
+        <div class="six columns">
+          <form action="/parthint" method="POST">
+            <label>Interest Part Names:</label>
+            <!-- <input type="text" class="form-control" id="partid" name="partid" placeholder="enter interested part names"> -->
+            <div class="row">
+              <input type="checkbox" class="two columns" name="partname" value="Repulsorlift Motor HP">
+              <label for="partname" class="eight columns">Repulsorlift Motor HP</label>
+            </div>
+
+            <div class="row">
+              <input type="checkbox" class="two columns" name="partname" value="Astrogation Buffer Length">
+              <label for="partname" class="eight columns">Astrogation Buffer Length</label>
+            </div>
+
+            <div class="row">
+              <input type="checkbox" class="two columns" name="partname" value="Polarity Sinks">
+              <label for="partname" class="eight columns">Polarity Sinks</label>
+            </div>
+
+            <div class="row">
+              <input type="checkbox" class="two columns" name="partname" value="Arakyd Vocabulator Model">
+              <label for="partname" class="eight columns">Arakyd Vocabulator Model</label>
+            </div>
+
+            <div class="row">
+              <input type="checkbox" class="two columns" name="partname" value="Axial Piston Model">
+              <label for="partname" class="eight columns">Axial Piston Model</label>
+            </div>
+
+            <div class="row">
+              <input type="checkbox" class="two columns" name="partname" value="Nanochip Model">
+              <label for="partname" class="eight columns">Nanochip Model</label>
+            </div>
+
+            <div class="row">
+              <input type="checkbox" class="two columns" name="partname" value="AutoTerrain Tread Count">
+              <label for="partname" class="eight columns">AutoTerrain Tread Count</label>
+            </div>
+
+            <div class="row">
+              <input type="checkbox" class="two columns" name="partname" value="InfoCore Size">
+              <label for="partname" class="eight columns">InfoCore Size</label>
+            </div>
+
+            <div class="row">
+              <input type="checkbox" class="two columns" name="partname" value="Sonoreceptors">
+              <label for="partname" class="eight columns">Sonoreceptors</label>
+            </div>
+
+             <div class="row">
+              <input type="checkbox" class="two columns" name="partname" value="Cranial Uplink Bandwidth">
+              <label for="partname" class="eight columns">Cranial Uplink Bandwidth</label>
+            </div>
+            
+            <button type="submit">Get hints!</button>
+            </ul>
+          </form>
+        </div>
+      </div>
+
+      </div>
+
+      <div >
+
+    </div>
+
+    <!-- Render Charts -->
+    <script type="text/javascript">
+      function parse(url, div) {
+        var opt = {
+          mode: "vega-lite",
+          renderer: "svg",
+          actions: {export: true, source: false, editor: false}
+        };
+        vegaEmbed("#"+div, url, opt, function(error, result) {
+          // result.view is the Vega View, url is the original Vega-Lite specification
+          vegaTooltip.vegaLite(result.view, url);
+        });
+      }
+
+      // $(document).ready(function(){
+      //   $("#container").width($(document).width()-50);
+      //   });
+      
+      parse("/hint", "predChart")
+      parse("/network", "network")
+      parse("/parts", "partChart")
+      parse("/times", "timeChart")
+      parse("/network", "network")
+
+      function refresh_parts() {
+          parse("/parts", "partChart")
+          parse("/hint", "predChart")
+          parse("/times", "timeChart")
+       }
+      setInterval(refresh_parts, 6000);
+    </script>
+
+  </body>
+</html>

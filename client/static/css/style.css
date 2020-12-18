@@ -1,0 +1,15 @@
+.container {
+	padding-top:40px;
+	padding-left,padding-right:20px;
+}
+.content {
+	padding:0 100px;
+}
+.item {
+	white-space:nowrap;
+	display:inline
+}
+h3{
+	padding:0;
+	margin:0;
+}
